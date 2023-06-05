@@ -2,28 +2,25 @@ package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemoryMemberRepository;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-//단위테스트. 좋은테스트일 확률이 높음. 순수 자바코드로 테스트를 짜는 연습이 필요함.
 
-class MemberServiceTest {
+@SpringBootTest // 스프링 컨테이너와 테스트를 함께 심행한다.
+@Transactional //트랜잭션이 롤백되기 때문에 DB에 반영안됨 -> 계속 테스트가능(다음테스트에 영향X) ->  DB연결까지 해보는 통합테스트
+    //서비스에는 정상적이게 동작하고 테스트케이스시에는 롤백됨
+class MemberServiceIntegrationTest {
 
-     MemberService memberService;
-     MemoryMemberRepository memberRepository;
+     @Autowired MemberService memberService;
+     @Autowired MemberRepository memberRepository;
 
-     @BeforeEach
-     public void beforeEach(){
-         memberRepository = new MemoryMemberRepository();
-         memberService = new MemberService(memberRepository);
-     }
-
-    @AfterEach //메서드 실행끝날때마다 동작 콜백메서드
-    public void afterEach(){
-        memberRepository.clearStore(); //순서상관없이 메서드 후에 클리어 필요(테스트는 서로 순서와 의존관계없이 설계되어야함 하나 끝날때마다
-        //저장소나 공용데이터들을 깔끔히 지워줘야 문제가 없음
-    }
     @Test
     void 회원가입() {
         //given 뭔가가 주어졌을 때
@@ -56,12 +53,5 @@ class MemberServiceTest {
             assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
         }*/
         //then
-    }
-    @Test
-    void findMembers() {
-    }
-
-    @Test
-    void findOne() {
     }
 }
