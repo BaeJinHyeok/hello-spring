@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class MemberServiceIntegrationTest {
 
      @Autowired MemberService memberService;
-     @Autowired MemberRepository memberRepository;
+     //@Autowired MemberRepository memberRepository;
 
     @Test
     void 회원가입() {
