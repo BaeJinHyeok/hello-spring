@@ -16,7 +16,7 @@ public class JdbcTemplateMemberRepository implements MemberRepository{
 
     private final JdbcTemplate jdbcTemplate;
 
-    @Autowired // 생성자가 하나일땐 Autowired 생략가능
+    //@Autowired // 생성자가 하나일땐 Autowired 생략가능
     public JdbcTemplateMemberRepository(DataSource dataSource) {
         this.jdbcTemplate = new jdbcTemplate(dataSource);
     }
